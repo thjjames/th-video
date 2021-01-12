@@ -263,6 +263,7 @@ export default {
       return hour > 0 ? `${hour}:${min}:${sec}` : `${min}:${sec}`;
     },
     onPercentChange(per) {
+      // android会跳到离currentTime最近的关键帧位置播放 暂无法修复
       const currentTime = this.duration * per / 100;
       this.$refs.video.currentTime = currentTime;
     },
