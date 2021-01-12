@@ -1,0 +1,5 @@
+# used by @babel/preset-env & postcss-preset-env
+# Browsers that we support
+> 1%
+last 2 versions
+not ie <= 8

@@ -1,0 +1,57 @@
+{
+  "name": "tuhu-video",
+  "version": "1.0.0",
+  "author": {
+    "name": "tianhaojun@tuhu.cn"
+  },
+  "description": "",
+  "main": "./dist/video.min.js",
+  "scripts": {
+    "build": "webpack --config build/webpack.prod.config.js",
+    "dev": "webpack-dev-server --config build/webpack.dev.config.js"
+  },
+  "dependencies": {
+    "lodash.throttle": "^4.1.1",
+    "tuhu-iconfont-miniprogram": "^1.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "7.7.7",
+    "@babel/plugin-proposal-class-properties": "7.7.4",
+    "@babel/plugin-proposal-decorators": "7.7.4",
+    "@babel/plugin-syntax-jsx": "7.7.4",
+    "@babel/plugin-transform-runtime": "7.7.6",
+    "@babel/runtime-corejs3": "^7.10.5",
+    "@vue/babel-preset-app": "^4.5.9",
+    "babel-loader": "8.0.6",
+    "babel-plugin-transform-modules": "^0.1.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "eslint": "^7.5.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.0.6",
+    "less": "^3.10.0",
+    "less-loader": "^5.0.0",
+    "postcss-aspect-ratio-mini": "^1.1.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-px-to-viewport": "^1.1.1",
+    "postcss-write-svg": "^3.0.1",
+    "style-loader": "^1.0.0",
+    "url-loader": "^1.1.2",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
+    "vue-router": "^3.3.4",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.0.9"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "license": "MIT"
+}
