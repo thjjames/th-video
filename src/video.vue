@@ -174,41 +174,6 @@ export default {
     },
     percent(newVal) {
       this.currentTime = this.duration * newVal / 100;
-    },
-    isFullscreen() {
-      const isSystem = this.buttonGroup.includes('systemFullscreen');
-      const element = this.$refs[isSystem ? 'video' : 'wrap'];
-      if (this.isFullscreen) {
-        if (isSystem) {
-          if (element.requestFullscreen) {
-            element.requestFullscreen();
-          } else if (element.mozRequestFullscreen) {
-            element.mozRequestFullscreen();
-          } else if (element.webkitRequestFullscreen) {
-            element.webkitRequestFullscreen();
-          } else if (element.webkitEnterFullscreen) {
-            element.webkitEnterFullscreen();
-          } else if (element.msRequestFullscreen) {
-            element.msRequestFullscreen();
-          }
-        } else {
-          element.classList.add('fullscreen', /* this.isInApp &&  */'rotate');
-        }
-      } else {
-        if (isSystem) {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (element.mozCancelFullscreen) {
-            element.mozCancelFullscreen();
-          } else if (element.webkitExitFullscreen) {
-            element.webkitExitFullscreen();
-          } else if (element.msExitFullscreen) {
-            element.msExitFullscreen();
-          }
-        } else {
-          element.classList.remove('fullscreen', /* this.isInApp &&  */'rotate');
-        }
-      }
     }
   },
   mounted() {
@@ -228,7 +193,47 @@ export default {
       }
     },
     toggleFullscreen() {
-      this.isFullscreen = !this.isFullscreen;
+      const isSystem = this.buttonGroup.includes('systemFullscreen');
+      const element = this.$refs[isSystem ? 'video' : 'wrap'];
+      const isSystemFullscreen = document.fullscreen ||
+        document.webkitIsFullscreen ||
+        document.webkitRequestFullscreen ||
+        document.mozFullscreen ||
+        document.mozRequestFullscreen ||
+        document.msFullscreenEnabled;
+
+      if (isSystem) {
+        if (isSystemFullscreen) {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.mozCancelFullscreen) {
+            document.mozCancelFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        } else {
+          if (element.requestFullscreen) {
+            element.requestFullscreen();
+          } else if (element.mozRequestFullscreen) {
+            element.mozRequestFullscreen();
+          } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+          } else if (element.webkitEnterFullscreen) {
+            element.webkitEnterFullscreen();
+          } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+          }
+        }
+      } else {
+        if (this.isFullscreen) {
+          element.classList.remove('fullscreen', this.isInApp && 'rotate');
+        } else {
+          element.classList.add('fullscreen', this.isInApp && 'rotate');
+        }
+        this.isFullscreen = !this.isFullscreen;
+      }
     },
     clickUiArea() {
       // 非播放或非控制栏时
