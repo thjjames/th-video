@@ -24,6 +24,11 @@ export default {
       type: Number,
       default: 0
     },
+    // 进度条的颜色
+    progressColor: {
+      type: String,
+      default: '#345dde'
+    },
     showSlider: {
       type: Boolean,
       default: true
@@ -31,11 +36,6 @@ export default {
     isControlDraggable: {
       type: Boolean,
       default: true
-    },
-    // 进度条的颜色
-    progressColor: {
-      type: String,
-      default: '#345dde'
     }
   },
   data() {
@@ -67,7 +67,6 @@ export default {
   methods: {
     addListener() {
       const $progress = this.$refs.progress;
-      // const $slider = this.$refs.slider;
 
       // reCalculate progress.width when progress resize
       const $video = document.getElementById('video');

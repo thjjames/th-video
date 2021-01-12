@@ -10,6 +10,7 @@
               <span class="control-bar-progress">
                 <span class="time">{{ `${formatMediaTime(currentTime)}/${formatMediaTime(duration)}` }}</span>
                 <media-progress
+                  ref="progress"
                   class="progress"
                   v-model="percent"
                   :isControlDraggable="isControlDraggable"
@@ -171,6 +172,9 @@ export default {
     volume(newVal) {
       this.curVolume = newVal;
     },
+    percent(newVal) {
+      this.currentTime = this.duration * newVal / 100;
+    },
     isFullscreen() {
       const isSystem = this.buttonGroup.includes('systemFullscreen');
       const element = this.$refs[isSystem ? 'video' : 'wrap'];
@@ -294,6 +298,10 @@ export default {
       if (this.isEnded) {
         this.isEnded = false;
       }
+
+      // 操作进度条时 更新进度条操作时间而非当前时间
+      const $progress = this.$refs.progress;
+      if ($progress && $progress.isOperating) return;
 
       this.currentTime = e.target.currentTime;
       this.percent = this.currentTime / this.duration * 100;
