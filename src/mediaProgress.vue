@@ -58,8 +58,10 @@ export default {
     }
   },
   mounted() {
-    this.width = this.$refs.progress.offsetWidth;
     this.addListener();
+  },
+  updated() {
+    this.width = this.$refs.progress.offsetWidth;
   },
   beforeDestroy() {
     this.removeListener();
