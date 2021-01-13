@@ -281,9 +281,6 @@ export default {
         setTimeout(() => {
           this.play();
         });
-      } else {
-        this.isPlaying = false;
-        this.isActive = false;
       }
       this.$emit('loadeddata', e);
     },
