@@ -43,6 +43,7 @@
               ref="video"
               :src="src" 
               :style="videoStyle"
+              :autoplay="autoplay"
               :controls="controls === 'default'"
               :muted="curVolume <= 0"
               :x5-video-player-type="x5Type && 'h5'"
@@ -157,14 +158,12 @@ export default {
 
       this.isEnded = false;
       if (this.autoplay) {
-        const volume = this.curVolume;
-        this.curVolume = 0;
+        // 静音直接播放 / 不静音需要页面有操作
+        // this.curVolume = 0;
         setTimeout(() => {
           this.play();
-          // this.curVolume = volume;
-        }, 500);
+        });
       } else {
-        // this.pause();
         this.isPlaying = false;
         this.isActive = false;
       }
@@ -191,6 +190,7 @@ export default {
       } else {
         this.play()
       }
+      this.isPlaying = !this.isPlaying;
     },
     toggleFullscreen() {
       const isSystem = this.buttonGroup.includes('systemFullscreen');
