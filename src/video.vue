@@ -153,21 +153,6 @@ export default {
     }
   },
   watch: {
-    src(newVal, oldVal) {
-      if (newVal === oldVal) return;
-
-      this.isEnded = false;
-      if (this.autoplay) {
-        // 静音直接播放 / 不静音需要页面有操作
-        // this.curVolume = 0;
-        setTimeout(() => {
-          this.play();
-        });
-      } else {
-        this.isPlaying = false;
-        this.isActive = false;
-      }
-    },
     volume(newVal) {
       this.curVolume = newVal;
     },
@@ -289,6 +274,17 @@ export default {
       this.$emit('loadedmetadata', e);
     },
     onLoadeddata(e) {
+      this.isEnded = false;
+      if (this.autoplay) {
+        // 静音直接播放 / 不静音需要页面有操作
+        // this.curVolume = 0;
+        setTimeout(() => {
+          this.play();
+        });
+      } else {
+        this.isPlaying = false;
+        this.isActive = false;
+      }
       this.$emit('loadeddata', e);
     },
     onProgress(e) {
