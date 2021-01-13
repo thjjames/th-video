@@ -48,7 +48,7 @@
               :muted="curVolume <= 0"
               :x5-video-player-type="x5Type && 'h5'"
               :x5-video-player-fullscreen="true"
-              preload
+              preload="auto"
               playsinline
               webkit-playsinline
               x-webkit-airplay="allow"
