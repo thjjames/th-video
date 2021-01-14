@@ -89,14 +89,5 @@ module.exports = {
       'vue': 'vue/dist/vue.esm.js',
       '@': resolve('src')
     }
-  },
-  devServer: {
-    historyApiFallback: true,
-    // https: true,
-    host: '0.0.0.0',
-    port: process.env.PORT || 8089,
-    disableHostCheck: true,
-    open: true,
-    hot: true
   }
 };
