@@ -140,7 +140,7 @@ export default {
       isFullscreen: false, // 是否全屏状态
       isInApp: (() => {
         const ua = navigator.userAgent.toLowerCase();
-        return ua.includes('lanhu') || ua.includes('tuhuyixing');
+        return ua.includes('tuhu_shop/ios') || ua.includes('shop tuhuandroid') || ua.includes('tuhuyixing');
       })()
     };
   },
