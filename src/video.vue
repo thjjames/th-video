@@ -46,7 +46,7 @@
               :autoplay="autoplay"
               :controls="controls === 'default'"
               :muted="curVolume <= 0"
-              :x5-video-player-type="x5Type && 'h5'"
+              :x5-video-player-type="x5Type && 'h5-page'"
               :x5-video-player-fullscreen="true"
               preload="auto"
               playsinline
