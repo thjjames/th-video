@@ -4,6 +4,9 @@
       <div class="wrap-inner">
         <div class="container">
           <div class="ui-area" :style="videoStyle" v-if="!(controls === 'default' && isActive)" @click.self="clickUiArea">
+            <div class="header-bar" v-show="isShowControlBar">
+              <span class="return-btn" @click.stop="toggleFullscreen()"></span>
+            </div>
             <span class="play-btn" @click.stop="play" v-show="!isPlaying"></span>
             <div :class="['control-bar', !isShowControlBar && 'hidden']" ref="controlBar" @click="onControlBarPersist" @touchmove="onControlBarPersist">
               <i :class="['icon left-btn', isPlaying ? 'icon-zanting' : 'icon-bofang1']" @click="togglePlay" />
@@ -367,6 +370,9 @@ export default {
       left: 50% !important;
       width: 100vh !important; // H5浏览器需要另外减去头部高度
       height: 100vw !important;
+      .header-bar {
+        opacity: 1 !important;
+      }
     }
     .wrap-inner {
       display: inline-block;
@@ -388,6 +394,29 @@ export default {
           user-select: none;
           z-index: 2;
           transform: translateZ(0);
+          .header-bar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            width: 100%;
+            height: 88px;
+            line-height: 88px;
+            color: #fff;
+            z-index: 6;
+            opacity: 0;
+            transition: all .3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .return-btn {
+              width: 48px;
+              height: 48px;
+              margin-left: 24px;
+              background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAE0ElEQVRoQ+WbTYwUVRDH/9U7PcP02LPIKrJ60Ysm3oweNK67hAiCQRIOBsXEaExMwKgsLsQ1QUlQL2IgGtF40YuLIgESSEAPG/lSD5hVDyZ6EBEVI7s4M73z1T10mdfz4XztTPfMdE9rz3Wq6tWv671+VdXvEVz6/cGsxPOFewsF3CUR3Qri2xi8jJhUEFRrWIbGxBqB/gTTjybzT6EQzqUiobM3EmXccI16aVRjXmpmjY0EWs/MdwMId2hfJ6KvGXxYispTKtFfHdppUOsJsJY1RpkxwcxrAIR65VzJToGIjhNhtxqVT3VruytgLWssN03eBWCkW0ds6p+RJNqhRuUvbMr3JsKX0+nhRSTvZtCjzNzVQ3PqOBExgffn2Ji4Pha75FjfqUIik3+YWHof4MVOdXsrTwkm8+nFSuRTJ3ZtR4eZw6mMsYeINnkd1YWARLSZ+d24Io8TkW4H3Bbw3NxcXI7GDzPzCjtGvZYhomkjm1o/NDSUajd2W2BN05aaUuQEgDvaGevz/zOSmV+tqmrLLawlsIhsaJEq3oh+hy0/65lCTlveKtILAos1q2ULx/06jVus62k1Glqz0JpeEDiZ1t8BsLnP07TT4fcNxsLPNFNuCiy2HgnSJ355GzulFm9vE+aGZltWA7BIKsII/9D/fdYpZr08JXTot9cnJw3AWkb/yGRs7HY4P+hLhClVCT9W7UsNsMiNmTH9X53KDTEWaShhRXXuXQOcTOunPSwEPJkERHQ6rsij5cEqwKLEM00+6YkXHg8iSTRWLi0rwMl0/ihAa730JZvN4rVdr2Dmm3N4/MmnsOGRmuXWQ1f42GAs8pAwaAFbnYqM8bsLxfuCTgvYye1b8f1331oyS5YM4eCRYz2ErDFVkBT5JtE5sYCTGX0LGHvcGq3ebj2s+P/BteswsX3SPRcI44NKeK8FnMoYJ5m5srDdGxVoBjsyOoaXd76KUKjX3aF/SYjoVFyRx0h0F2MZ4+8uGm62n0+/YEsO6mlFvpYS87lVRNJntr3uULDPsJbXAwO0ihLzxiQRv94hhy01P8AKR5npJUqlCx8wzCdsed6BkF9gi1uS9CGlMsaXzHxPByxtVfwEawETfUXJtH4ewM1tvXco4DfYkvu/UCptXGbwdQ55Worncjm8uG28klQIYS+2nnYMBJoVUzrHzJF2wk7+f2/f2zjw8VRFxQ+wpSmddwX4rb1v4sihgz4FdmFKX7kyhy3PbsJvFy/6Ctqa0smM/jMYtziZsnZkZ2dnsfX5zf6CJpx3dVvyG7S1LbmdePgJ2ko8vEgt/QJtpZbzOWPl1av8uZ112Y2MH6Ct4sHL8rDP0MXyUETNywZAv6ArDQAB7HWLpxm0py2efjTx6qFvWDaM/QcOdfOaaKVb28SzotyHNq2A3rljEr9euIDnxl/A/SsfcAWYiI7GFXldsSYu/QLXiC9G+f/3qQXAmcFY+L5yYIP9MU08hUB9LhXAgfsgLqADdeShvLgDdahFQAfu2JKADtTBtEpCEqSjh2XoQB0uLUMH6vhwdUYfmAPi1dCBugJQDR6YSx71RWuxtDS3AbTahZNABYBPSJL0Rt+v8TSAB+WiVrM2heiGKun8CDBwZ+UqHvMwga6puYoHnieiS15dxfsHFgYMcqkZyjAAAAAASUVORK5CYII=);
+              background-size: 100% 100%;
+            }
+          }
           .play-btn {
             position: relative;
             display: block;
