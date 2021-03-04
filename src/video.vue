@@ -421,6 +421,7 @@ export default {
               margin: 0 16px;
               text-align: left;
               width: 100%;
+              flex: 0 1 auto;
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
