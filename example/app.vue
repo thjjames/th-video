@@ -25,6 +25,7 @@ export default {
   },
   data() {
     return {
+      index: 0,
       src: '',
       poster: {
         src: 'https://img2.tuhu.org/tech/pic/ea5PVZGEz4jM5XOYBoHG5A_w700_h747.png',
@@ -53,8 +54,12 @@ export default {
   },
   methods: {
     clickButton() {
-      this.flag = !this.flag;
-      this.src = this.flag ? 'https://img1.tuhu.org/videos/ProductVideo/a04c/0461/738d960a7c6ad0ea2e913581_720.mp4' : 'https://v.tuhu.org/videos/tech/video/lgnKTfTT-cu9YNR1nJWSOXka5s9h.mp4';
+      this.index = ++this.index;
+      this.src = [
+        'https://v.tuhu.org/videos/tech/video/lgnKTfTT-cu9YNR1nJWSOXka5s9h.mp4',
+        'https://img1.tuhu.org/videos/tech/video/lv8QcJAkwBVyB8AVAD9uiYxLAwCc.mp4',
+        'https://img1.tuhu.org/videos/tech/video/llv5lIZRf6_wcJv8xP_sowMPbNCO.mp4'
+      ][this.index];
     }
   }
 };
