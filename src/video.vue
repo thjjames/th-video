@@ -4,7 +4,7 @@
       <div class="wrap-inner">
         <div class="container">
           <div class="ui-area" :style="videoStyle" v-if="!(controls === 'default' && isActive)" @click.self="clickUiArea">
-            <div class="header-bar" v-show="isShowControlBar">
+            <div class="header-bar" v-show="isShowControlBar || !isPlaying">
               <i class="return-btn icon icon-jiantou-xiangzuo-dingzuobian" @click.stop="toggleFullscreen()" />
               <span class="title" v-if="title">{{ title }}</span>
             </div>
@@ -193,6 +193,12 @@ export default {
     }
   },
   mounted() {
+  },
+  destroyed() {
+    if (this.controlBarTimeout) {
+      clearTimeout(this.controlBarTimeout);
+      this.controlBarTimeout = null;
+    }
   },
   methods: {
     play: throttle(function() {

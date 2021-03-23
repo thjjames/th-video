@@ -3,6 +3,7 @@
     <th-video 
       :src="src"
       :poster="poster"
+      title="田豪峻测试"
       :controls="'custom'"
       :button-group="['fullscreen']"
       :ended-config="endedConfig"
