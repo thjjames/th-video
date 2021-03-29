@@ -1,13 +1,17 @@
 <template>
   <div class="container">
     <th-video 
+      ref="video"
       :src="src"
       :poster="poster"
       title="田豪峻测试"
       :controls="'custom'"
       :button-group="['fullscreen']"
-      :ended-config="endedConfig"
-    />
+    >
+      <template v-slot:end>
+        <button @click="$refs.video.play()">再看一遍</button>
+      </template>
+    </th-video> 
     <button @click="clickButton">切换视频</button>
     <th-video 
       :src="src"
@@ -31,22 +35,6 @@ export default {
       poster: {
         src: 'https://img2.tuhu.org/tech/pic/ea5PVZGEz4jM5XOYBoHG5A_w700_h747.png',
         style: 'cover'
-      },
-      endedConfig: {
-        buttonGroup: [
-          {
-            text: '再看一遍', 
-            color: '#fb7299',
-            callback: e => {
-              e.play();
-            }
-          }, {
-            text: '继续做练习', 
-            callback: e => {
-              console.log(e);
-            }
-          }
-        ]
       }
     }
   },
@@ -75,6 +63,23 @@ body {
     margin: 0;
     .tuhu-video-wrap {
       margin-top: 20px;
+      button {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 2px solid #345dde;
+        user-select: none;
+        outline: 0;
+        min-height: 64px;
+        min-width: 96px;
+        padding: 8px 16px;
+        border-radius: 16px;
+        color: #345dde;
+        background-color: transparent;
+        font-size: 28px;
+        font-weight: 500;
+      }
     }
   }
 }

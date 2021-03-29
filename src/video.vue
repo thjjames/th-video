@@ -29,16 +29,8 @@
                 </template>
               </span>
             </div>
-            <div class="ended-wrap" v-if="isEnded && endedConfig">
-              <div class="ended-btn-group">
-                <button 
-                  v-for="item in endedConfig.buttonGroup" 
-                  :style="{color: item.color, borderColor: item.color}"
-                  @click.stop="isEnded = false; item.callback($refs.video);"
-                >
-                  {{item.text}}
-                </button>
-              </div>
+            <div class="ended-wrap" v-if="isEnded && $scopedSlots.end">
+              <slot name="end"></slot>
             </div>
             <div class="barrage-wrap" ref="barrage"></div>
           </div>
