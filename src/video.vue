@@ -423,7 +423,7 @@ export default {
             height: 88px;
             line-height: 88px;
             color: #fff;
-            z-index: 10;
+            z-index: 1100;
             opacity: 0;
             transition: all .3s;
             display: flex;
