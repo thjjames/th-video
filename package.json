@@ -1,5 +1,5 @@
 {
-  "name": "tuhu-video",
+  "name": "th-video",
   "version": "1.0.0",
   "author": {
     "name": "tianhaojun@tuhu.cn"
@@ -11,8 +11,7 @@
     "dev": "webpack-dev-server --config build/webpack.dev.config.js"
   },
   "dependencies": {
-    "lodash.throttle": "^4.1.1",
-    "tuhu-iconfont-miniprogram": "^1.1.2"
+    "lodash.throttle": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "7.7.7",

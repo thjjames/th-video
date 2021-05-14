@@ -55,13 +55,12 @@ export default {
 </script>
 
 <style lang="less">
-@import "~tuhu-iconfont-miniprogram/src/shopApp.less";
 body {
   -webkit-tap-highlight-color: transparent;
   margin: 0;
   .container {
     margin: 0;
-    .tuhu-video-wrap {
+    .th-video {
       margin-top: 20px;
       button {
         display: inline-block;

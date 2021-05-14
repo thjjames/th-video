@@ -1,16 +1,16 @@
 <template>
-  <div class="tuhu-video-wrap">
-    <div id="video" class="wrap" ref="wrap">
-      <div class="wrap-inner">
+  <div class="th-video">
+    <div id="video" class="outer-wrap" ref="wrap">
+      <div class="inner-wrap">
         <div class="container">
           <div class="ui-area" :style="videoStyle" v-if="!(controls === 'default' && isActive)" @click.self="clickUiArea">
             <div class="header-bar" v-show="isShowControlBar || !isPlaying">
-              <i class="return-btn icon icon-jiantou-xiangzuo-dingzuobian" @click.stop="toggleFullscreen()" />
+              <i class="return-btn icon icon-left-arrow" @click.stop="toggleFullscreen()" />
               <span class="title" v-if="title">{{ title }}</span>
             </div>
             <span class="play-btn" @click.stop="play" v-show="!isPlaying"></span>
             <div :class="['control-bar', !isShowControlBar && 'hidden']" ref="controlBar" @click="onControlBarPersist" @touchmove="onControlBarPersist">
-              <i :class="['icon left-btn', isPlaying ? 'icon-zanting' : 'icon-bofang1']" @click="togglePlay" />
+              <i :class="['icon left-btn', isPlaying ? 'icon-stop' : 'icon-play']" @click="togglePlay" />
               <span class="control-bar-progress">
                 <span class="time">{{ `${formatMediaTime(currentTime)}/${formatMediaTime(duration)}` }}</span>
                 <media-progress
@@ -23,9 +23,9 @@
               </span>
               <span class="right-btn-group">
                 <template v-for="item in buttonGroup">
-                  <i v-if="item === 'barrage'" :class="['icon right-btn icon-danmu']" />
-                  <i v-else-if="item === 'volume'" :class="['icon right-btn icon-yuyin']" />
-                  <i v-else-if="item === 'systemFullscreen' || item === 'fullscreen'" :class="['icon right-btn', isFullscreen ? 'icon-suoxiao' : 'icon-fangda']" @click="toggleFullscreen()" />
+                  <i v-if="item === 'barrage'" :class="['icon right-btn icon-barrage']" />
+                  <i v-else-if="item === 'volume'" :class="['icon right-btn icon-voice']" />
+                  <i v-else-if="item === 'systemFullscreen' || item === 'fullscreen'" :class="['icon right-btn', isFullscreen ? 'icon-reduce' : 'icon-enlarge']" @click="toggleFullscreen()" />
                 </template>
               </span>
             </div>
@@ -149,7 +149,7 @@ export default {
       isFullscreen: false, // 是否全屏状态
       isInApp: (() => {
         const ua = navigator.userAgent.toLowerCase();
-        return ua.includes('tuhu_shop/ios') || ua.includes('shop tuhuandroid') || ua.includes('tuhuyixing');
+        return ua.includes('android/ios');
       })()
     };
   },
@@ -352,14 +352,13 @@ export default {
 </script>
 
 <style lang="less">
-@import "~tuhu-iconfont-miniprogram/src/shopApp.less";
-.tuhu-video-wrap {
+.th-video {
   -webkit-tap-highlight-color: transparent;
   padding-top: 56.25%;
   position: relative;
   width: 100%;
   height: 0;
-  .wrap {
+  .outer-wrap {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -394,7 +393,7 @@ export default {
         opacity: 1 !important;
       }
     }
-    .wrap-inner {
+    .inner-wrap {
       display: inline-block;
       width: 100%;
       height: 100%;
