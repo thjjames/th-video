@@ -70,8 +70,8 @@ module.exports = {
         ]
       },
       {
-        test: /\.(gif|jpg|png|woff|svg|eot|ttf|otf)\??.*$/,
-        // exclude: /node_modules/, 
+        test: /\.(gif|jpe?g|png|woff2?|svg|eot|ttf|otf)$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'url-loader',
