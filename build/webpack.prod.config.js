@@ -10,7 +10,6 @@ module.exports = merge(webpackBaseConfig, {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/dist/',
     filename: 'video.min.js',
     chunkFilename: '[name].chunk.js',
     library: 'video',
