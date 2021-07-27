@@ -58,7 +58,6 @@ module.exports = {
         exclude: /node_modules/, 
         use: [
           'style-loader', 
-          'vue-style-loader',
           {
             loader: 'css-loader',
             options: {
